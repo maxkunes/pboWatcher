@@ -19,3 +19,6 @@ Run it.
 # TODO
 * Switch to an official or better (for error output / debug output) PBO Packer.
 * Add support for one node instance for more complicated mods such as ones for more addon folders.
+
+# Known Issues
+* Does not inform the user if the current file is being used by another process and therfore cannot be modified.
