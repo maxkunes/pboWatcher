@@ -8,12 +8,15 @@ node "C:\pboWatcher.js" "C:\Program Files (x86)\Steam\steamapps\common\DayZ\@MOD
 AddonFolderName is the name of the folder that exists in the @Mod\Addons\ path which is normally packed into a pbo.
 
 Script assumes the package chokidar is installed and accessible. This is used to watch the directory for changes.
+Script assumes the package node-notifier is installed and accessible. This is used to do crossplatform toasts on packing. (Notifications)
 Script also assumes PBO manager is installed in the C:\\ drive. Feel free to change the path to your PBOManager installation on line 38.
 Zero error checking is done due to PBO Manager providing little to zero output when something goes wrong. 
 */
 
 var chokidar = require('chokidar');
 var exec = require('child_process').exec;
+const notifier = require('node-notifier');
+
 
 
 function execute(command, callback) { // https://stackoverflow.com/questions/12941083/execute-and-get-the-output-of-a-shell-command-in-node-js
@@ -31,6 +34,7 @@ var addonDirectory = process.argv[2];
 var addonName = process.argv[3];
 var directoryToWatch = addonDirectory + '\\' + addonName;
 
+var lastNotificationTime = 0;
 
 chokidar.watch(directoryToWatch).on('all', (event, path) => {
 
@@ -41,4 +45,14 @@ chokidar.watch(directoryToWatch).on('all', (event, path) => {
     var packCommand = `\"C:\\Program Files\\PBO Manager v.1.4 beta\\PBOConsole.exe\" -pack "${directoryToWatch}" "${addonDirectory + '\\' +  addonName}.pbo"`;
 
     execute(packCommand, function(name) {});
+
+   if((new Date()).getSeconds() - lastNotificationTime > 10) {
+    notifier.notify({
+        title: 'PBO Watcher Notification!',
+        message: 'A file has changed. The PBO has been repacked!'
+      });
+    lastNotificationTime = (new Date()).getSeconds();
+   }
+
+    
 });
