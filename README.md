@@ -15,3 +15,7 @@ AddonFolderName refers to the folder that needs to be packed into a pbo when cha
 `node "C:\pboWatcher.js" "C:\Program Files (x86)\Steam\steamapps\common\DayZ\@MODNAME\Addons" "AddonFolderName"`
 
 Run it. 
+
+# TODO
+* Switch to an official or better (for error output / debug output) PBO Packer.
+* Add support for one node instance for more complicated mods such as ones for more addon folders.
