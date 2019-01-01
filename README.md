@@ -12,6 +12,6 @@ Put this command in a bat file or manually paste this in to an administrative co
 AddonFolderName refers to the folder that needs to be packed into a pbo when changes occur.
 
 
-`node "C:\pboWatcher.js" "C:\Program Files (x86)\Steam\steamapps\common\DayZ\\@MODNAME\Addons" "AddonFolderName"`
+`node "C:\pboWatcher.js" "C:\Program Files (x86)\Steam\steamapps\common\DayZ\@MODNAME\Addons" "AddonFolderName"`
 
 Run it. 
